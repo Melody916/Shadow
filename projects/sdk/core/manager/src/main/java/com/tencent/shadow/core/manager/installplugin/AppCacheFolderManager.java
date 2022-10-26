@@ -18,6 +18,8 @@
 
 package com.tencent.shadow.core.manager.installplugin;
 
+import android.os.Build;
+
 import java.io.File;
 
 /**
@@ -48,7 +50,11 @@ public class AppCacheFolderManager {
     }
 
     public static File getLibDir(File root, String key) {
-        return new File(getLibRootDir(root), key + "_lib");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return new File(getLibRootDir(root),  key + "_lib");
+        } else {
+            return new File(getLibRootDir(root),  "lollipop_lib");
+        }
     }
 
     public static File getLibCopiedFile(File soDir, String key) {
